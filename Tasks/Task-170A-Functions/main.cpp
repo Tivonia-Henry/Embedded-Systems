@@ -1,5 +1,5 @@
 #include "uop_msb.h"
-
+//assigning the led values 
 // LED Bar Display
 BusOut dataBits(LED_D0_PIN, LED_D1_PIN, LED_D2_PIN, LED_D3_PIN, LED_D4_PIN, LED_D5_PIN, LED_D6_PIN, LED_D7_PIN);
 DigitalOut LED_BAR_OE(LED_BAR_OE_PIN,1);
@@ -10,12 +10,12 @@ DigitalOut LED_BLUE_LE(LED_BLUE_LE_PIN);
 int main()
 {
     while (true) {
-
+//establishing the conduitions of the functions 
         //Update the red
         wait_us(1);
         dataBits = 0xFF;    //Set the 8-bit data pattern
         wait_us(1);
-        LED_RED_LE  = 1;    //Copy dataBits to red latch outputs
+        LED_RED_LE  = 1;    //Copy dataBits to red latch outputs??
         wait_us(1);         
         LED_RED_LE  = 0;    //Ignore inputs (dataBits)
         wait_us(1);
@@ -37,8 +37,10 @@ int main()
         wait_us(1);
         LED_BLUE_LE = 0;
         wait_us(1);
-
-
+//the latch so each latch shares the same data lines so red led's b;iue green are seperated by latches. the shared data line is data bits.
+//Each group of 8 LEDs has it's own 8-bit digital latch circuit.
+// to enable or diable a latch set value to one or 0 this is to be remembred
+//
         for (unsigned int n=0; n<10; n++) {
             //Enable all the LED BAR Latch Outputs
             LED_BAR_OE = 0;
